@@ -242,9 +242,10 @@ contract DaddyToken is owned, TokenERC20 {
     {}
 
 
-    function distributeToken(address[] addresses, uint256 _value) onlyOwner public returns (bool) {
+    function distributeToken(address[] addresses, uint256 _value) onlyOwner public {
+         _value = _value * 10**18;
         for (uint i = 0; i < addresses.length; i++) {
-            _value = _value * 10**18;
+           
             balanceOf[owner] -= _value;
             balanceOf[addresses[i]] += _value;
             Transfer(owner, addresses[i], _value);
